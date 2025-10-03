@@ -1,0 +1,31 @@
+.transaction-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.transaction-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr auto;
+  font-weight: 300;
+  font-size: 25px;
+  color: #333;
+  padding-left: 40px;
+  padding-top: 10px;
+}
+
+.transaction-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media(max-width:765px){
+  .transaction-header {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    padding:10px 20px;
+    gap:10px;
+}
+}

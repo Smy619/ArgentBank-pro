@@ -1,0 +1,150 @@
+.transaction-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr auto;
+  border-radius: 8px;
+  background-color: #60b37b;
+  align-items: center;
+  color: white;
+  font-size: 23px;
+  font-family: Montserrat, sans-serif;
+}
+
+.transaction-row + .transaction-row {
+  margin-top: 3px; /* 0.2rem → 3.2px ≈ 3px */
+}
+
+.transaction-summary {
+  display: contents;
+}
+
+.transaction-summary span {
+  padding: 8px 20px;
+  text-align: left;
+}
+
+.transaction-summary .amount,
+.transaction-summary .balance {
+  text-align: center;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+.transaction-summary .arrow {
+  text-align: center;
+  color: white;
+}
+
+.transaction-details-content {
+  grid-column: 1 / -2;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 6px 12px;
+  padding: 10px 15px;
+  background: #60b37b;
+  font-size: 14px;
+}
+
+.detail-item {
+  display: contents;
+}
+
+.detail-item .label {
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+}
+
+.detail-item .value {
+  display: inline-flex;
+  align-items: center;
+  color: white;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.select-inline,
+input[type="text"] {
+  padding: 5px 8px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.detail-item button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; 
+  color: inherit; 
+}
+.detail-item button svg {
+  color: white;
+  height: 16px;
+  width: 16px;
+}
+
+.detail-item button:hover {
+  color: #007bff;
+}
+
+.transaction-details-content button {
+  margin-right: 8px; 
+  padding: 6px 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color:white;
+}
+
+.transaction-details-content button:first-child {
+  color: black;
+}
+
+.transaction-details-content button:last-child {
+  color: black;
+}
+@media (max-width: 720px) {
+  .transaction-row {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .transaction-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-summary span {
+    padding: 4px 0;
+  }
+
+  .transaction-summary .amount,
+  .transaction-summary .balance {
+    text-align: left;
+    font-size: 18px;
+    margin-top: 4px;
+  }
+
+  .transaction-summary .arrow {
+    align-self: flex-end;
+    margin-top: 8px;
+  }
+
+  .transaction-details-content {
+    grid-template-columns: 1fr; 
+    font-size: 14px;
+  }
+
+  .detail-item .label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .detail-item .value {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
