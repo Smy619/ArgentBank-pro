@@ -56,6 +56,7 @@ Backend available at: `http://localhost:3001/api/v1`
 ---
 
 2️⃣ Backend Setup
+
 cd Backend
 npm install
 
@@ -68,6 +69,7 @@ JWT_SECRET=yourSecretKey
 
 
 Start Backend:
+
 npm install
 npm run dev:server
 
@@ -87,6 +89,7 @@ npm start
 Frontend will run at 👉 http://localhost:3000
 
 🧪 Scripts
+
 Backend
 cd Backend
 npm install
