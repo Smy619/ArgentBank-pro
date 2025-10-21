@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import Account from "../../components/account/Account";
@@ -52,7 +53,9 @@ function Profile() {
   useEffect(()=> {
     dispatch(fetchAccountsThunk())
 }, [dispatch]);
-
+  if (!token){
+    return <Navigate to="/" replace />
+  }
   if (loading) return <p>Loading profile ...</p>;
 
   return (

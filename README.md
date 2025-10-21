@@ -1,33 +1,32 @@
 # Argent Bank - React Frontend
 
-Argent Bank is a responsive **React frontend application** for a fictional online banking platform.  
-It allows users to securely authenticate, view and edit their profile, access multiple bank accounts, and manage their transactions.  
-Built with **React 20, Redux Toolkit, Axios, CSS, and React Router v6**, this project demonstrates modern frontend architecture and API integration in a real-world SaaS use case.  
+**Dynamic Redux version of the Argent Bank project (OpenClassrooms P10)**  
+Enhanced version featuring **real API calls**, **async state management**, and **modular React architecture**.
 
-This project is part of the **OpenClassrooms – Web Integrator** path (Project 10). 
 
 ---
 
 ## 🚀 Features
 
-- User authentication (JWT login)
-- Dashboard with user profile information
-- Multiple accounts list (fetched dynamically from API)
-- Transaction history per account
-- Transaction detail expansion (category, notes)
-- Edit profile (user name /first name / last name)
-- Responsive design (mobile-first)
+- 🔐 Authentication with JWT (Login / Logout / Profile)
+- 🧠 State management with **Redux Toolkit**
+- 🌐 Dynamic API calls (GET, PATCH)
+- 🧾 Transactions module with real backend structure
+- 🎨 Responsive design + Converted assets to **WebP**
+- 🧰 Clean, scalable folder organization
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **React 20** (Create React App)
-- **Redux Toolkit** (state management)
-- **Axios** (API calls)
-- **React Router v6**
-- **CSS** (styling)
-- **JWT Authentication**
+- **React 20 (Create React App)** – Frontend framework for building dynamic UI  
+- **Redux Toolkit** – Centralized state management for authentication and user data  
+- **Axios** – HTTP client for secure API communication  
+- **React Router v6** – Client-side routing and protected route handling  
+- **CSS** – Responsive and clean styling  
+- **JWT Authentication** – Secure login, logout, and session persistence via token storage  
+- **Swagger (OpenAPI 2.0)** – API documentation and endpoint specification
+
 
 ---
 
@@ -38,7 +37,7 @@ src/
 ├── features/ # Redux slices (auth, accounts, transactions)
 ├── pages/ # Application pages (Login, Dashboard, etc.)
 ├── services/ # API services (axios calls)
-├── styles/ # SCSS global + variables
+├── styles/ # CSS global + variables
 └── App.js # Main app & routing
 
 ---
@@ -52,6 +51,16 @@ Backend available at: `http://localhost:3001/api/v1`
 - `PUT /user/profile` → Update user profile
 - `GET /accounts` → Get all user accounts
 - `GET /accounts/:id/transactions` → Get account transactions
+
+### 📘 Notes
+- All protected routes require a valid **JWT** in the `Authorization` header, formatted as:
+- HTTP Status Codes implemented:
+- `200` → Success  
+- `400` → Bad request (invalid data)  
+- `401` → Unauthorized (missing or invalid token)  
+- `403` → Forbidden (accessing another user’s data)  
+- `404` → Not found (resource doesn’t exist)  
+- `500` → Internal server error  
 
 ---
 
