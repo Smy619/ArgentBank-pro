@@ -15,14 +15,21 @@ dbConnection()
 
 // CORS White-list
 const allowedOrigins = [
+  "https://argent-bank.vercel.app",
   "https://argent-bank-e7fdgcg4m-solennes-projects-8d96e84f.vercel.app",
   "http://localhost:3000"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Not allowed by CORS"), false);
+  },
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 // Middleware
 app.use(express.json())
