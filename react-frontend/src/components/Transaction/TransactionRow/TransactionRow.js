@@ -22,10 +22,11 @@ function TransactionRow({ transaction, onUpdate }) {
   const [editNote, setEditNote] = useState(note);
 
   const handleSave = async () => {
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:3001/api/v1/transactions/${id}`,
+        `${API_BASE_URL}/transactions/${id}`,
         { category: editCategory, note: editNote },
         { headers: { Authorization: `Bearer ${token}` } }
       );

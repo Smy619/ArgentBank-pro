@@ -23,10 +23,12 @@ function EditUserForm({ onCancel }) {
   }, [user, dispatch]);
 
   const handleSave = async (e) => {
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
+
     e.preventDefault();
     try {
       // Call API to update user info
-      const results = await fetch("http://localhost:3001/api/v1/user/profile", {
+      const results = await fetch(`${API_BASE_URL}/user/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
