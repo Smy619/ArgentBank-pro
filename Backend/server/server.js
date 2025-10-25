@@ -24,7 +24,7 @@ app.use('/api/v1/accounts', require('./routes/accountRoutes'))
 app.use('/api/v1/transactions', require('./routes/transactionRoutes'))
 
 // Swagger DEV only
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.ENABLE_SWAGGER === 'true') {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 }
 
