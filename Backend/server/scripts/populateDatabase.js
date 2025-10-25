@@ -1,47 +1,32 @@
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const User = require("../models/userModel");
+const User = require("../database/models/userModel");
 
-const users = [
-  {
-    firstName: "Tony",
-    lastName: "Stark",
-    email: "tony@stark.com",
-    password: "test1234",
-    userName: "IronMan",
-  },
-  {
-    firstName: "Steve",
-    lastName: "Rogers",
-    email: "steve@rogers.com",
-    password: "test1234",
-    userName: "CaptainAmerica",
-  },
-];
-
-async function seed() {
+module.exports = async () => {
   try {
-    console.log("Connecting...");
-    await mongoose.connect(process.env.MONGODB_URI);
+    await User.deleteMany({}); 
 
-    for (let u of users) {
-      const exists = await User.findOne({ email: u.email });
+    const users = [
+      {
+        firstName: "Tony",
+        lastName: "Stark",
+        email: "tony@stark.com",
+        password: await bcrypt.hash("test1234", 12),
+        userName: "IronMan",
+      },
+      {
+        firstName: "Steve",
+        lastName: "Rogers",
+        email: "steve@rogers.com",
+        password: await bcrypt.hash("test1234", 12),
+        userName: "Captain",
+      },
+    ];
 
-      if (!exists) {
-        const hashedPwd = await bcrypt.hash(u.password, 10);
-        await User.create({ ...u, password: hashedPwd });
-        console.log(`✅ Added ${u.email}`);
-      } else {
-        console.log(`⚠️ Already exists: ${u.email}`);
-      }
-    }
+    await User.insertMany(users);
 
-    console.log("✅ Done!");
-    process.exit();
+    console.log("Seed inserted!");
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error("Database seed error:", err);
+    throw err;
   }
-}
-
-seed();
+};
