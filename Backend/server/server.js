@@ -24,7 +24,6 @@ app.use(cors({
   credentials: true
 }));
 
-
 // Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -33,6 +32,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/user', require('./routes/userRoutes'))
 app.use('/api/v1/accounts', require('./routes/accountRoutes'))
 app.use('/api/v1/transactions', require('./routes/transactionRoutes'))
+
+// ✅ ALWAYS ON seed route (delete later)
+app.get("/seed", async (req, res) => {
+  try {
+    await require("./scripts/populateDatabase")();
+    res.send("Database seeded successfully!");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error seeding database");
+  }
+});
 
 // Swagger DEV only
 if (process.env.ENABLE_SWAGGER === 'true') {
@@ -46,15 +56,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`)
 })
-
-if (process.env.NODE_ENV !== "production") {
-  app.get("/seed", async (req, res) => {
-    try {
-      await require("./scripts/populateDatabase")();
-      res.send("Database seeded successfully!");
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error seeding database");
-    }
-  });
-}
