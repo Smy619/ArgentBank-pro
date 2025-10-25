@@ -13,8 +13,19 @@ const PORT = process.env.PORT || 3001
 // DB connect
 dbConnection()
 
+// CORS White-list
+const allowedOrigins = [
+  "https://argent-bank-e7fdgcg4m-solennes-projects-8d96e84f.vercel.app",
+  "http://localhost:3000"
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
+
 // Middleware
-app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
