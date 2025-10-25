@@ -33,7 +33,7 @@ app.use('/api/v1/user', require('./routes/userRoutes'))
 app.use('/api/v1/accounts', require('./routes/accountRoutes'))
 app.use('/api/v1/transactions', require('./routes/transactionRoutes'))
 
-// ✅ ALWAYS ON seed route (delete later)
+// ALWAYS ON seed route (delete later)
 app.get("/seed", async (req, res) => {
   try {
     await require("./scripts/populateDatabase")();
