@@ -47,3 +47,14 @@ app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`)
 })
 
+if (process.env.NODE_ENV !== "production") {
+  app.get("/seed", async (req, res) => {
+    try {
+      await require("./scripts/populateDatabase")();
+      res.send("Database seeded successfully!");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error seeding database");
+    }
+  });
+}
