@@ -18,14 +18,17 @@ Enhanced version featuring **real API calls**, **async state management**, and *
 ---
 
 ## 🛠️ Tech Stack
+- **React 18 (Create React App)** – Component-based UI framework for building dynamic and reactive interfaces
+- **Redux Toolkit** – Predictable global state management for authentication and user profile data
+- **Axios** – Secure HTTP client for backend API communication
+- **React Router v6** – Client-side routing with protected/private routes
+- **CSS** – Modular and responsive styling for UI consistency
+- **JWT Authentication** – Secure session handling via token-based authentication
+- **Swagger (OpenAPI 2.0)** – Interactive API documentation and endpoint specification
+- **MongoDB Atlas** – Cloud-hosted NoSQL database for persistent user data
+- **Render (Backend Hosting)** – Cloud deployment for Express server and database connectivity
+- **Vercel (Frontend Hosting)** – Production build deployment for React SPA
 
-- **React 20 (Create React App)** – Frontend framework for building dynamic UI  
-- **Redux Toolkit** – Centralized state management for authentication and user data  
-- **Axios** – HTTP client for secure API communication  
-- **React Router v6** – Client-side routing and protected route handling  
-- **CSS** – Responsive and clean styling  
-- **JWT Authentication** – Secure login, logout, and session persistence via token storage  
-- **Swagger (OpenAPI 2.0)** – API documentation and endpoint specification
 
 
 ---
@@ -83,9 +86,9 @@ npm install
 npm run dev:server
 
 
-API will be available at 👉 http://localhost:3001/api/v1
+API will be available at 👉 https://argentbank-pro.onrender.com/
 
-Swagger docs available at 👉 http://localhost:3001/api-docs
+Swagger docs available at 👉 https://argentbank-pro.onrender.com/api-docs
 
 3️⃣ Frontend Setup
 
@@ -129,5 +132,5 @@ Sun Ting (Solène)
 
 GitHub: https://github.com/Smy619
 
-Formation: OpenClassrooms - Web integrator
+web devepplor in French
 

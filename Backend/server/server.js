@@ -17,7 +17,6 @@ dbConnection()
 // CORS whitelist
 const allowedOrigins = [
   "https://argent-bank-pro.vercel.app",
-  "https://argent-bank-e7fdgcg4m-solennes-projects-8d96e84f.vercel.app",
   "http://localhost:3000"
 ]
 
@@ -45,17 +44,6 @@ app.use('/api/v1/user', require('./routes/userRoutes'))
 app.use('/api/v1/accounts', validateToken, require('./routes/accountRoutes'))
 app.use('/api/v1/transactions', validateToken, require('./routes/transactionRoutes'))
 
-// Seed route
-app.get("/seed", async (req, res) => {
-  try {
-    await require("./scripts/populateDatabase")()
-    res.send("Database seeded successfully!")
-  } catch (err) {
-    console.error(err)
-    res.status(500).send("Error seeding database")
-  }
-})
-
 // Swagger DEV only
 if (process.env.ENABLE_SWAGGER === 'true') {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
@@ -68,4 +56,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`)
 })
+
 

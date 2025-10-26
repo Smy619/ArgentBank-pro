@@ -1,72 +1,150 @@
 # Argent Bank API
 
-This codebase contains the code needed to run the backend for Argent Bank.
+This repository contains the backend API for the Argent Bank banking web application.
 
-## Getting Started
+It handles:
 
-### Prerequisites
+- User authentication via JWT
+- Protected profile endpoints
+- Secure username updates
+- MongoDB database integration
+- Production deployment on Render
+- Swagger/OpenAPI documentation
 
-Argent Bank uses the following tech stack:
+## 🚀 Production Backend URL
+https://argentbank-pro.onrender.com
+> This URL is used by the deployed frontend.
 
-- [Node.js v12](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
-Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+## 🧾 Swagger API Documentation
 
-```bash
-# Check Node.js version
-node --version
+### Production
 
-# Check Mongo version
-mongo --version
-```
+https://argentbank-pro.onrender.com/api-docs
 
-### Instructions
+### Local
+http://localhost:3001/api-docs
 
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+## 🧰 Tech Stack
+| Layer | Technology |
+|-------|------------|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | MongoDB Atlas |
+| Auth | JWT |
+| API Spec | Swagger/OpenAPI |
+| Hosting | Render.com |
 
-```bash
-# Install dependencies
+## 📦 Installation
+
+Clone the project:
+git clone https://github.com/Smy619/ArgentBank-pro.git
+
+Navigate to backend folder:
+cd Backend
+
+Install dependencies:
 npm install
 
-# Start local dev server
+⚙️ Running Locally
+
+Development server:
+
 npm run dev:server
 
-# Populate database with two users
-npm run populate-db
-```
+Backend will be available at:
+http://localhost:3001
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
 
-## Populated Database Data
+👤 Seeded Test Users
 
-Once you run the `populate-db` script, you should have two users in your database:
+Tony Stark
 
-### Tony Stark
+Email: tony@stark.com
 
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
+Password: test1234
 
-### Steve Rogers
+Steve Rogers
 
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
+Email: steve@rogers.com
 
-## API Documentation
+Password: test1234
 
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+Note: These are stored securely (hashed) in MongoDB.
 
-## Design Assets
+🔐 Authentication
 
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
+All secured routes require:
 
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
+Authorization: Bearer <jwt_token>
+Token is returned from /login.
 
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+📌 API Endpoints
+✅ Signup
+POST /api/v1/user/signup
+
+✅ Login
+POST /api/v1/user/login
+
+Response:
+{
+  "token": "<jwt>"
+}
+
+✅ Get Profile (requires token)
+GET /api/v1/user/profile
+
+✅ Update Profile Username (requires token)
+PUT /api/v1/user/profile
+
+{
+  "userName": "NewName"
+}
+
+🔐 Token Middleware
+Located at:
+
+middleware/tokenValidation.js
+
+Validates JWT from header.
+
+🌍 Environment Variables
+Create .env in /Backend:
+
+TOKEN_SECRET=YourSecretHere
+MONGODB_URI=your_mongodb_atlas_connection
+PORT=3001
+ENABLE_SWAGGER=true
+
+🧠 Security Notes
+Passwords are hashed using bcrypt
+JWT expires in 24h
+_id, password, and __v fields are removed when returned as objects
+
+🛠 Script Reference
+| Script                | Description               |
+| --------------------- | ------------------------- |
+| `npm run dev:server`  | Start backend in dev mode |
+| `npm run populate-db` | Insert seed demo users    |
+
+⚠️ Render Cold Start Warning
+
+Render free tier may sleep after inactivity.
+
+The first request may return:
+Failed to fetch
+Simply retry after a few seconds.
+
+This backend satisfies:
+
+✅ JWT authentication
+✅ Profile fetch route
+✅ Profile update route
+✅ Password hashing
+✅ Swagger documentation
+✅ Production hosting
+
+🧑‍💻 Author
+
+Sun Ting
+Full-Stack Web Developer – France 🇫🇷
