@@ -7,8 +7,6 @@ router.post('/signup', userController.createUser)
 
 router.post('/login', userController.loginUser)
 
-router.delete('/logout', validateToken, userController.logoutUser)
-
 router.get('/profile', validateToken, userController.getUserProfile)
 
 router.put('/profile', validateToken, userController.updateUserProfile)
