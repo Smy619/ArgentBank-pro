@@ -6,6 +6,7 @@ const swaggerUi = require('swagger-ui-express')
 const yaml = require('yamljs')
 const swaggerDocs = yaml.load('./swagger.yaml')
 const dbConnection = require('./database/connection')
+const { validateToken } = require('./middleware/tokenValidation')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -13,12 +14,12 @@ const PORT = process.env.PORT || 3001
 // DB connect
 dbConnection()
 
-// CORS White-list
+// CORS whitelist
 const allowedOrigins = [
-  "https://argent-bank.vercel.app",
+  "https://argent-bank-pro.vercel.app",
   "https://argent-bank-e7fdgcg4m-solennes-projects-8d96e84f.vercel.app",
   "http://localhost:3000"
-];
+]
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -28,28 +29,32 @@ app.use(cors({
   },
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+}))
 
 // Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Routes
-app.use('/api/v1/user', require('./routes/userRoutes'))
-app.use('/api/v1/accounts', require('./routes/accountRoutes'))
-app.use('/api/v1/transactions', require('./routes/transactionRoutes'))
+// Serve static PWA related files
+app.use(express.static("public"))
 
-// ALWAYS ON seed route (delete later)
+// Routes without auth
+app.use('/api/v1/user', require('./routes/userRoutes'))
+
+// Protected routes
+app.use('/api/v1/accounts', validateToken, require('./routes/accountRoutes'))
+app.use('/api/v1/transactions', validateToken, require('./routes/transactionRoutes'))
+
+// Seed route
 app.get("/seed", async (req, res) => {
   try {
-    await require("./scripts/populateDatabase")();
-    res.send("Database seeded successfully!");
+    await require("./scripts/populateDatabase")()
+    res.send("Database seeded successfully!")
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error seeding database");
+    console.error(err)
+    res.status(500).send("Error seeding database")
   }
-});
+})
 
 // Swagger DEV only
 if (process.env.ENABLE_SWAGGER === 'true') {
@@ -57,9 +62,10 @@ if (process.env.ENABLE_SWAGGER === 'true') {
 }
 
 app.get('/', (req, res) => {
-  res.send(' Hello from ArgentBank Backend!')
+  res.send('Hello from ArgentBank Backend!')
 })
 
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`)
 })
+

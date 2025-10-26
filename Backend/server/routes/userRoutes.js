@@ -1,22 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
-const tokenValidation = require('../middleware/tokenValidation')
+const { validateToken } = require('../middleware/tokenValidation')
 
 router.post('/signup', userController.createUser)
 
 router.post('/login', userController.loginUser)
 
-router.get(
-  '/profile',
-  tokenValidation.validateToken,
-  userController.getUserProfile
-)
+router.delete('/logout', validateToken, userController.logoutUser)
 
-router.put(
-  '/profile',
-  tokenValidation.validateToken,
-  userController.updateUserProfile
-)
+router.get('/profile', validateToken, userController.getUserProfile)
+
+router.put('/profile', validateToken, userController.updateUserProfile)
 
 module.exports = router
